@@ -1,0 +1,11 @@
+IP="136.159.94.154"
+KEYPAIR="devstack"
+SIZE="m1.large"
+AMI="ami-0000002f"
+PRIVATE_KEY="/Users/everett/Keys/dair-sandbox/creds-toews-admin/devstack.private"
+
+# The devstack master branch (the default) generally points to trunk versions of OpenStack components. 
+# For older, stable versions, look for branches named stable/[milestone].
+# IMPORTANT: If you change this value, you must change all of the branches in localrc to a similar stable branch.
+# https://github.com/cloudbuilders/devstack/branches
+BRANCH="master"

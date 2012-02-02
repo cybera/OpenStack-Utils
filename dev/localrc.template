@@ -1,0 +1,62 @@
+
+ADMIN_PASSWORD=devstack
+MYSQL_PASSWORD=devstack
+RABBIT_PASSWORD=devstack
+SERVICE_TOKEN=devstack
+
+FLAT_INTERFACE=br100
+
+# The devstack master branch (the default) generally points to trunk versions of OpenStack components. 
+# For older, stable versions, look for branches named stable/[milestone].
+# IMPORTANT: If you change this value, you must change all of the branches in localrc to a similar stable branch.
+# https://github.com/cloudbuilders/devstack/branches
+#DEVSTACK_BRANCH=""
+
+# compute service
+# https://github.com/openstack/nova/branches
+#NOVA_BRANCH=master
+
+# storage service
+# https://github.com/openstack/swift/branches
+#SWIFT_BRANCH=master
+
+# swift and keystone integration
+# https://github.com/cloudbuilders/swift-keystone2/branches
+#SWIFT_KEYSTONE_BRANCH=master
+
+# image catalog service
+# https://github.com/openstack/glance/branches
+#GLANCE_BRANCH=master
+
+# unified auth system (manages accounts/tokens)
+# https://github.com/openstack/keystone/branches
+#KEYSTONE_BRANCH=stable/diablo
+
+# a websockets/html5 or flash powered VNC console for vm instances
+# https://github.com/cloudbuilders/noVNC/branches
+#NOVNC_BRANCH=master
+
+# django powered web control panel for openstack
+# https://github.com/openstack/horizon/branches
+#HORIZON_BRANCH=master
+
+# python client library to nova that horizon (and others) use
+# https://github.com/openstack/python-novaclient/branches
+#NOVACLIENT_BRANCH=master
+
+# python keystone client library to nova that horizon uses
+# https://github.com/openstack/python-keystoneclient
+#KEYSTONECLIENT_BRANCH=master
+
+# openstackx is a collection of extensions to openstack.compute & nova
+# that is *deprecated*.  The code is being moved into python-novaclient & nova.
+# https://github.com/cloudbuilders/openstackx/branches
+#OPENSTACKX_BRANCH=master
+
+# quantum service
+# https://github.com/openstack/quantum
+#QUANTUM_BRANCH=master
+
+# CI test suite
+# https://github.com/openstack/tempest/branches
+#CITEST_BRANCH=master

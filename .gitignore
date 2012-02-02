@@ -1,0 +1,6 @@
+*.pyc
+*.log
+dev/devstack_conf.py
+dev/devstack.pem
+dev/devstackrc
+dev/localrc
