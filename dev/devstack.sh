@@ -39,7 +39,9 @@ if [ "$INSTANCE_ID" != "" ]; then
 fi
 
 # Run a new instance and wait for it to be ready
-INSTANCE_ID=`euca-run-instances -k devstack -t $SIZE $AMI | grep INSTANCE | cut -f 2`
+INSTANCE_OUTPUT=`euca-run-instances -k devstack -t $SIZE $AMI`
+INSTANCE_ID=`echo $INSTANCE_OUTPUT | grep INSTANCE | cut -f 2`
+PRIVATE_IP=`echo $INSTANCE_OUTPUT | grep INSTANCE | cut -f 5`
 
 echo "Instance: $INSTANCE_ID"
 
@@ -61,6 +63,10 @@ while [ "$STATE" != "ADDRESS" ]; do
   STATE=`echo $STATE` # trims whitespace
   echo "State: $STATE"
 done
+
+if [ "$PRIVATE_CLOUD" == "True" ]; then
+  IP=PRIVATE_IP
+fi
 
 # Wait for ssh to be ready
 LOCATION="ubuntu@$IP"
