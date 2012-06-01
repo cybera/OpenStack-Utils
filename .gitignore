@@ -4,3 +4,4 @@ dev/devstack.pem
 dev/devstackrc
 dev/localrc
 dev/localrc.*
+dev/id_rsa

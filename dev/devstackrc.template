@@ -21,3 +21,8 @@ PRIVATE_CLOUD="False"
 # IMPORTANT: If you change this value, you must change all of the branches in localrc to a similar stable branch.
 # https://github.com/cloudbuilders/devstack/branches
 BRANCH="master"
+
+# Settings for doing OpenStack development
+GIT_NAME="unset" # Firstname Lastname
+GIT_EMAIL="unset"
+GERRIT_USERNAME="unset"

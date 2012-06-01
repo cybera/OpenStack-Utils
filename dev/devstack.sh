@@ -91,7 +91,7 @@ $SSH "sudo ./install-command-logging.sh"
 $SSH sudo apt-get -qqy update
 $SSH sudo apt-get -qqy install git
 
-if [ "$DEVSTACK_BRANCH" != "" ]; then
+if [ "$DEVSTACK_BRANCH" != "master" ]; then
   GIT="git clone https://github.com/openstack-dev/devstack.git -b $DEVSTACK_BRANCH devstack/"
   EXIT_STATUS=$?
 
@@ -110,6 +110,20 @@ $SSH "cd devstack; ./stack.sh"
 $SSH sudo updatedb
 $SSH "sed -i '$ a\. \`locate nova.bash_completion\`' .bashrc"
 $SSH "sed -i '$ a\cd devstack; . openrc' .bashrc"
+
+# Prep devstack for committing code to Git
+if [ "$GIT_NAME" != "unset" ]; then
+  $SSH git config --global user.name "$GIT_NAME"
+  $SSH git config --global user.email "$GIT_EMAIL"
+  $SSH git config --global --add gitreview.username "$GERRIT_USERNAME"
+  $SSH sudo pip install git-review
+  $SSH sudo apt-get -qqy install git-review
+  $SCP $ABS_PATH/id_rsa $LOCATION:.ssh/
+  $SSH "cd /opt/stack/nova; git remote add gerrit ssh://$GERRIT_USERNAME@review.openstack.org:29418/openstack/nova.git"
+  $SSH "echo 'StrictHostKeyChecking no' > .ssh/config"
+  $SSH "cd /opt/stack/nova; git review -s"
+  $SSH sudo apt-get -qqy install python-dev libxml2-dev libxslt1-dev libsasl2-dev libsqlite3-dev libssl-dev libldap2-dev
+fi
 
 read -p "Press [Enter] to ssh to your new cloud."
 
