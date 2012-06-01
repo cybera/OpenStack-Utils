@@ -90,20 +90,26 @@ $SCP $ABS_PATH/install-command-logging.sh $LOCATION:
 $SSH "sudo ./install-command-logging.sh"
 $SSH sudo apt-get -qqy update
 $SSH sudo apt-get -qqy install git
-$SSH git clone https://github.com/cloudbuilders/devstack.git
 
 if [ "$DEVSTACK_BRANCH" != "" ]; then
-  $SSH "cd devstack; git checkout $DEVSTACK_BRANCH"
+  GIT="git clone https://github.com/openstack-dev/devstack.git -b $DEVSTACK_BRANCH devstack/"
   EXIT_STATUS=$?
 
   if [ $EXIT_STATUS -ne 0 ]; then
     echo "Branch $DEVSTACK_BRANCH does not exist."
     exit 1
   fi
+else
+  GIT="git clone https://github.com/openstack-dev/devstack.git"
 fi
 
+$SSH $GIT
 $SCP $ABS_PATH/localrc $LOCATION:devstack/
 $SSH "cd devstack; ./stack.sh"
+
+$SSH sudo updatedb
+$SSH "sed -i '$ a\. \`locate nova.bash_completion\`' .bashrc"
+$SSH "sed -i '$ a\cd devstack; . openrc' .bashrc"
 
 read -p "Press [Enter] to ssh to your new cloud."
 
